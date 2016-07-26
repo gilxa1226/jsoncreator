@@ -1,0 +1,8 @@
+{
+   "title": {{ title }}
+   "createdDate": {{date}},
+   "details":
+      { 
+         "newDate: {{date}} 
+      }
+}

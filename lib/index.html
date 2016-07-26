@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,inital-scale=1">
+        <title>JSON Creator</title>
+        <link rel="stylesheet" href="style.css" type="text/css">
+    </head>
+    <body>
+        <section class="controls">
+            <button id="open-template-file">Open Template File</button>
+            <button id="generate">Generate JSON</button>
+            <button id="save-file">Save JSON</button>
+            <button id="push-to-mongo">Push JSON to Mongo</button>
+        </section>
+        
+        <section class="content">
+            <textarea class="template-json"></textarea>
+            <div class="rendered-json"><pre><code id="codespace"></code></pre></div>
+        </section>
+        
+        <script type="text/javascript">
+            require('./renderer');
+        </script>
+
+    </body>
+</html>

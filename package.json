@@ -1,0 +1,25 @@
+{
+  "name": "jsoncreator",
+  "version": "1.0.0",
+  "description": "This is a JSON Creation utility which provides an Electron front end to faker.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ./lib/main.js"
+  },
+  "keywords": [
+    "json",
+    "creation",
+    "utility"
+  ],
+  "author": "Michael J. Haller",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "bootstrap": "3.3.6",
+    "dummy-json": "^1.0.1",
+    "electron-prebuilt": "^1.2.8",
+    "handlebars": "4.0.5",
+    "jquery": "^3.1.0",
+    "json-validator": "0.0.31"
+  }
+}

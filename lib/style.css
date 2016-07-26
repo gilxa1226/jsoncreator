@@ -1,0 +1,90 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body, input {
+    font: "verdana";
+}
+
+textarea, input, div, button {
+    outline: none;
+}
+
+.controls {
+    background-color: dimgrey;
+    padding: 10pt;
+    position: fixed;
+    width: 100%;
+}
+
+.controls button {
+    background-color: #2E7D32;
+    border: none;
+    font-size: 10pt;
+    color: whitesmoke;
+    padding: 0.5em 1em;
+}
+
+.controls button:hover {
+    background-color: #43A047;
+}
+
+.controls button:active {
+    background-color: #388E3C;
+}
+
+.controls button:disabled {
+    background-color: #1B5E20;
+    color: gray;
+}
+
+.content {
+    height: 100%;
+    display: flex;
+}
+
+.template-json, .rendered-json {
+    margin-top: 4em;
+    min-height: 100vh;
+    max-width: 50%;
+    flex-grow: 1;
+    padding: 1em;
+    overflow: scroll;
+}
+
+.template-json {
+    font-size: 10pt;
+    border: none;
+    font-family: monoface;
+}
+
+pre {
+    background-color: ghostwhite;
+    border: 1px solid silver;
+    padding: 10px 20px;
+    margin: 20px; 
+}
+.json-key {
+    color: brown;
+}
+.json-value {
+    color: navy;
+}
+.json-string {
+    color: olive;
+}
