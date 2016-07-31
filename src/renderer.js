@@ -2,6 +2,7 @@ const $ = require('jquery');
 //const handlebars = require('handlebars');
 const dummyJson = require('dummy-json');
 const validator = require('json-validator');
+const ace = require('ace');
 
 const templateJson = $('.template-json');
 const renderedJson = $('#codespace');
