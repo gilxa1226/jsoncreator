@@ -1,14 +1,22 @@
 const $ = require('jquery');
-//const handlebars = require('handlebars');
 const dummyJson = require('dummy-json');
 const validator = require('json-validator');
-const ace = require('ace');
+const fs = require('fs');
+const remote = require('electron').remote;
+const dialog = remote.dialog;
 
-const templateJson = $('.template-json');
 const renderedJson = $('#codespace');
-
 const genButton = $('#generate');
+const openButton = $('#open-template-file');
+const saveButton = $('#save-file');
+
 const curdate = new Date();
+var currentWindow  = remote.getCurrentWindow();
+var JavaScriptMode = ace.require('ace/mode/javascript').Mode;
+var editorInstance = ace.edit('editor');
+
+editorInstance.setTheme('ace/theme/twilight');
+editorInstance.session.setMode(new JavaScriptMode());
 
 if (!library)
    var library = {};
@@ -41,13 +49,35 @@ var data = {
 };
 
 genButton.on('click', function () {
-    var content = templateJson.val();
+    var content = editorInstance.getValue();
     //content = '<pre>' + JSON.stringify(content) + '</pre>';
     renderTemplateToJson(content);
 });
+
+openButton.on('click', openHandler);
+saveButton.on('click', saveHandler);
 
 function renderTemplateToJson(tempJson) {
     //var template = handlebars.compile(tempJson);
     var html = JSON.parse(dummyJson.parse(tempJson));
     renderedJson.html(library.json.prettyPrint(html));
+}
+
+function openHandler () {
+    var fileNames = dialog.showOpenDialog(currentWindow);
+
+    if (fileNames !== undefined) {
+        var fileName = fileNames[0];
+        fs.readFile(fileName, 'utf8', function (err, data) {
+            editorInstance.setValue(data);
+        });
+    }
+}
+
+function saveHandler () {
+    var fileName = dialog.showSaveDialog(currentWindow);
+
+    if (fileName !== undefined) {
+        fs.writeFile(fileName, editorInstance.getValue());
+    }
 }

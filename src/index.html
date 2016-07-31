@@ -11,14 +11,17 @@
             <button id="open-template-file">Open Template File</button>
             <button id="generate">Generate JSON</button>
             <button id="save-file">Save JSON</button>
-            <button id="push-to-mongo">Push JSON to Mongo</button>
+            <button id="push-to-mongo" disabled="disabled" >Push JSON to Mongo</button>
         </section>
         
         <section class="content">
-            <textarea class="editor"></textarea>
+            <div id="editor" class="template-json"></div>
             <div class="rendered-json"><pre><code id="codespace"></code></pre></div>
         </section>
         
+        <script src="../lib/ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../lib/mode-javascript.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../lib/theme-twilight.js" type="text/javascript" charset="utf-8"></script>
         <script type="text/javascript">
             require('./renderer');
         </script>
