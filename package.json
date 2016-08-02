@@ -21,6 +21,6 @@
     "electron-prebuilt": "^1.2.8",
     "handlebars": "4.0.5",
     "jquery": "^3.1.0",
-    "json-validator": "0.0.31",
+    "json-validator": "0.0.31"
   }
 }
