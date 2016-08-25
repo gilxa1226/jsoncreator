@@ -2,6 +2,7 @@ const $ = require('jquery');
 const dummyJson = require('dummy-json');
 const validator = require('json-validator');
 const fs = require('fs');
+const path = require('path');
 const remote = require('electron').remote;
 const dialog = remote.dialog;
 
@@ -14,9 +15,12 @@ const curdate = new Date();
 var currentWindow  = remote.getCurrentWindow();
 var JavaScriptMode = ace.require('ace/mode/javascript').Mode;
 var editorInstance = ace.edit('editor');
+var helperFunctions = {};
 
 editorInstance.setTheme('ace/theme/twilight');
 editorInstance.session.setMode(new JavaScriptMode());
+
+loadHelpers();
 
 if (!library)
    var library = {};
@@ -50,7 +54,6 @@ var data = {
 
 genButton.on('click', function () {
     var content = editorInstance.getValue();
-    //content = '<pre>' + JSON.stringify(content) + '</pre>';
     renderTemplateToJson(content);
 });
 
@@ -58,8 +61,7 @@ openButton.on('click', openHandler);
 saveButton.on('click', saveHandler);
 
 function renderTemplateToJson(tempJson) {
-    //var template = handlebars.compile(tempJson);
-    var html = JSON.parse(dummyJson.parse(tempJson));
+    var html = JSON.parse(dummyJson.parse(tempJson, {helpers: helperFunctions}));
     renderedJson.html(library.json.prettyPrint(html));
 }
 
@@ -80,4 +82,11 @@ function saveHandler () {
     if (fileName !== undefined) {
         fs.writeFile(fileName, editorInstance.getValue());
     }
+}
+
+function loadHelpers () {
+    fs.readdirSync(path.join(__dirname,'helpers')).forEach(function requireFile(file)
+	{
+		helperFunctions[path.basename(file, '.js')] = require('./helpers/'+file).helper;
+	});
 }
