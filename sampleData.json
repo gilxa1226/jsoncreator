@@ -1,8 +1,9 @@
 {
-   "title": {{ title }}
-   "createdDate": {{date}},
+   "createdBy": "{{title}} {{firstName}} {{lastName}}",
+   "createdDate": "{{ date '2016' '2017' 'D MMM YYYY'}}",
    "details":
       { 
-         "newDate: {{date}} 
+         "newDate": "{{ date '2016' '2017' 'D MMM YYYY'}}",
+         "sample": "{{sample}}"
       }
 }
