@@ -1,6 +1,7 @@
 {
    "createdBy": "{{title}} {{firstName}} {{lastName}}",
-   "createdDate": "{{ date '2016' '2017' 'D MMM YYYY'}}",
+   "createdDate": "{{ dateNow 'MM-DD-YY'}}",
+   "createdTime": "{{ timeNow }}",
    "details":
       { 
          "newDate": "{{ date '2016' '2017' 'D MMM YYYY'}}",
