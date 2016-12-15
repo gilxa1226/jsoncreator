@@ -3,9 +3,14 @@
    "createdDate": "{{ dateNow 'MM-DD-YY'}}",
    "createdTime": "{{ timeNow }}",
    "details":
+   [
+   {{#forEach myArray}}
       { 
-         "newDate": "{{ date '2016' '2017' 'D MMM YYYY'}}",
+         "date": "{{ date '2016' '2017' 'D MMM YYYY'}}",
          "sample": "{{sample}}",
-         "foo": "{{foo}}"
+         "foo": "{{foo}}",
+         "value": "{{@value}}"
       }
+   {{/forEach}}
+   ]
 }
