@@ -21,6 +21,10 @@ body, input {
     font: "verdana";
 }
 
+h1 {
+    margin: 0;
+}
+
 textarea, input, div, button {
     outline: none;
 }
@@ -58,20 +62,39 @@ textarea, input, div, button {
     display: flex;
 }
 
-.template-json, .rendered-json {
+.editors, .rendered-json {
     background-color: grey;
     margin-top: 55px;
-    min-height: 100vh;
     max-width: 50%;
     flex-grow: 1;
     padding: 16px;
-    overflow: scroll;
 }
 
-.template-json {
+.editors {
+    display: flex;
+    flex-flow: column;
+}
+
+.template {
+    flex-grow: 2;
+}
+
+.mock-data {
+    flex-grow: 1;
+    margin-top: 10px;
+}
+
+.editor-section {
+    display: flex;
+    flex-flow: column;
+}
+
+.json-editor {
     font-size: 10pt;
     border: none;
     font-family: monoface;
+    flex-grow: 1;
+    width: 100%;
 }
 
 pre {

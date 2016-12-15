@@ -14,11 +14,15 @@ const saveButton = $('#save-file');
 const curdate = new Date();
 var currentWindow  = remote.getCurrentWindow();
 var JavaScriptMode = ace.require('ace/mode/javascript').Mode;
-var editorInstance = ace.edit('editor');
+var editorInstance = ace.edit('template-editor');
+var mockDataInstance = ace.edit('mock-data-editor')
 var helperFunctions = {};
 
 editorInstance.setTheme('ace/theme/twilight');
 editorInstance.session.setMode(new JavaScriptMode());
+
+mockDataInstance.setTheme('ace/theme/twilight');
+mockDataInstance.session.setMode(new JavaScriptMode());
 
 loadHelpers();
 
@@ -54,14 +58,22 @@ var data = {
 
 genButton.on('click', function () {
     var content = editorInstance.getValue();
-    renderTemplateToJson(content);
+    var mockData = {};
+
+    try {
+        mockData = JSON.parse(mockDataInstance.getValue());
+    } catch (err) {
+        console.error('Error parsing mock data:', err);
+        mockData = {};
+    }
+    renderTemplateToJson(content, mockData);
 });
 
 openButton.on('click', openHandler);
 saveButton.on('click', saveHandler);
 
-function renderTemplateToJson(tempJson) {
-    var html = JSON.parse(dummyJson.parse(tempJson, {helpers: helperFunctions}));
+function renderTemplateToJson(tempJson, mockData) {
+    var html = JSON.parse(dummyJson.parse(tempJson, {helpers: helperFunctions, mockdata: mockData}));
     renderedJson.html(library.json.prettyPrint(html));
 }
 
