@@ -1,30 +1,47 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,inital-scale=1">
-        <title>JSON Creator</title>
-        <link rel="stylesheet" href="style.css" type="text/css">
-    </head>
-    <body>
-        <section class="controls">
-            <button id="open-template-file">Open Template File</button>
-            <button id="generate">Generate JSON</button>
-            <button id="save-file">Save JSON</button>
-            <button id="push-to-mongo" disabled="disabled" >Push JSON to Mongo</button>
-        </section>
-        
-        <section class="content">
-            <div id="editor" class="template-json"></div>
-            <div class="rendered-json"><pre><code id="codespace"></code></pre></div>
-        </section>
-        
-        <script src="../lib/ace.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../lib/mode-javascript.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../lib/theme-twilight.js" type="text/javascript" charset="utf-8"></script>
-        <script type="text/javascript">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,inital-scale=1">
+    <title>JSON Creator</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+
+<body>
+    <section class="controls">
+        <button id="generate">Generate JSON</button>
+        <button id="open-template-file">Open Template File</button>
+        <button id="save-template-file">Save Template</button>
+        <button id="open-mock-data-file">Open Mock Data File</button>
+        <button id="save-mock-data-file">Save Mock Data</button>
+        <button id="push-to-mongo" disabled="disabled">Push JSON to Mongo</button>
+    </section>
+
+    <section class="content">
+        <div class="editors">
+            <div class="template editor-section">
+                <h1>Template</h1>
+                <div id="template-editor" class="json-editor"></div>
+            </div>
+            <div class="mock-data editor-section">
+                <h1>Mock Data</h1>
+                <div id="mock-data-editor" class="json-editor"></div>
+            </div>
+        </div>
+        <div class="rendered-json">
+            <h1>Rendered JSON</h1>
+            <pre><code id="codespace"></code></pre>
+        </div>
+    </section>
+
+    <script src="../lib/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../lib/mode-javascript.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../lib/theme-twilight.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
             require('./renderer');
         </script>
 
-    </body>
+</body>
+
 </html>

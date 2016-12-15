@@ -8,17 +8,23 @@ const dialog = remote.dialog;
 
 const renderedJson = $('#codespace');
 const genButton = $('#generate');
-const openButton = $('#open-template-file');
-const saveButton = $('#save-file');
+const openTemplateButton = $('#open-template-file');
+const saveTemplateButton = $('#save-template-file');
+const openMockDataButton = $('#open-mock-data-file');
+const saveMockDataButton = $('#save-mock-data-file');
 
 const curdate = new Date();
 var currentWindow  = remote.getCurrentWindow();
 var JavaScriptMode = ace.require('ace/mode/javascript').Mode;
-var editorInstance = ace.edit('editor');
+var editorInstance = ace.edit('template-editor');
+var mockDataInstance = ace.edit('mock-data-editor')
 var helperFunctions = {};
 
 editorInstance.setTheme('ace/theme/twilight');
 editorInstance.session.setMode(new JavaScriptMode());
+
+mockDataInstance.setTheme('ace/theme/twilight');
+mockDataInstance.session.setMode(new JavaScriptMode());
 
 loadHelpers();
 
@@ -54,33 +60,45 @@ var data = {
 
 genButton.on('click', function () {
     var content = editorInstance.getValue();
-    renderTemplateToJson(content);
+    var mockData = {};
+
+    try {
+        mockData = JSON.parse(mockDataInstance.getValue());
+    } catch (err) {
+        console.error('Error parsing mock data:', err);
+        mockData = {};
+    }
+    renderTemplateToJson(content, mockData);
 });
 
-openButton.on('click', openHandler);
-saveButton.on('click', saveHandler);
+openTemplateButton.on('click', openHandler.bind(null,'template'));
+saveTemplateButton.on('click', saveHandler.bind(null,'template'));
+openMockDataButton.on('click', openHandler.bind(null,'mockData'));
+saveMockDataButton.on('click', saveHandler.bind(null,'mockData'));
 
-function renderTemplateToJson(tempJson) {
-    var html = JSON.parse(dummyJson.parse(tempJson, {helpers: helperFunctions}));
+function renderTemplateToJson(tempJson, mockData) {
+    var html = JSON.parse(dummyJson.parse(tempJson, {helpers: helperFunctions, mockdata: mockData}));
     renderedJson.html(library.json.prettyPrint(html));
 }
 
-function openHandler () {
+function openHandler (editorString) {
     var fileNames = dialog.showOpenDialog(currentWindow);
+    var editor = (editorString === 'mockData' ? mockDataInstance : editorInstance);
 
     if (fileNames !== undefined) {
         var fileName = fileNames[0];
         fs.readFile(fileName, 'utf8', function (err, data) {
-            editorInstance.setValue(data);
+            editor.setValue(data);
         });
     }
 }
 
-function saveHandler () {
+function saveHandler (editorString) {
     var fileName = dialog.showSaveDialog(currentWindow);
+    var editor = (editorString === 'mockData' ? mockDataInstance : editorInstance);
 
     if (fileName !== undefined) {
-        fs.writeFile(fileName, editorInstance.getValue());
+        fs.writeFile(fileName, editor.getValue());
     }
 }
 

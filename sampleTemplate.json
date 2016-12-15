@@ -1,0 +1,11 @@
+{
+   "createdBy": "{{title}} {{firstName}} {{lastName}}",
+   "createdDate": "{{ dateNow 'MM-DD-YY'}}",
+   "createdTime": "{{ timeNow }}",
+   "details":
+      { 
+         "newDate": "{{ date '2016' '2017' 'D MMM YYYY'}}",
+         "sample": "{{sample}}",
+         "foo": "{{foo}}"
+      }
+}
