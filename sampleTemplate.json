@@ -5,6 +5,7 @@
    "details":
       { 
          "newDate": "{{ date '2016' '2017' 'D MMM YYYY'}}",
-         "sample": "{{sample}}"
+         "sample": "{{sample}}",
+         "foo": "{{foo}}"
       }
 }
