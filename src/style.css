@@ -68,9 +68,6 @@ textarea, input, div, button {
     max-width: 50%;
     flex-grow: 1;
     padding: 16px;
-}
-
-.editors {
     display: flex;
     flex-flow: column;
 }
@@ -101,7 +98,9 @@ pre {
     background-color: ghostwhite;
     border: 1px solid silver;
     padding: 10px 20px;
-    margin: 1px; 
+    margin: 1px;
+    flex-grow: 1;
+    overflow-y: scroll;
 }
 .json-key {
     color: brown;
